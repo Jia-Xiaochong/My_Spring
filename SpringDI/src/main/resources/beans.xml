@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="newBook" class="com.jiaxc.dao.Book">
+        <property name="name" value="《计算机组成原理》" />
+    </bean>
+
+    <!-- 基于构造函数的依赖注入 -->
+    <bean id="libraryOne" class="com.jiaxc.dao.LibraryOne">
+        <constructor-arg ref="newBook" />
+    </bean>
+
+    <!-- 基于设值函数的依赖注入 -->
+    <bean id="libraryTwo" class="com.jiaxc.dao.LibraryTwo">
+        <property name="book" ref="newBook" />
+    </bean>
+
+    <!-- 注入内部 Beans -->
+    <bean id="libraryThree" class="com.jiaxc.dao.LibraryTwo">
+        <property name="book">
+                <bean id="book" class="com.jiaxc.dao.Book" >
+                    <property name="name" value="《数据库系统概论》" />
+                </bean>
+        </property>
+    </bean>
+
+    <!-- 注入集合 -->
+    <bean id="javaCollection" class="com.jiaxc.dao.JavaCollection">
+
+        <property name="addressList">
+            <list>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </list>
+        </property>
+
+        <property name="addressSet">
+            <set>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </set>
+        </property>
+
+        <property name="addressMap">
+            <map>
+                <entry key="1" value="INDIA"/>
+                <entry key="2" value="Pakistan"/>
+                <entry key="3" value="USA"/>
+                <entry key="4" value="USA"/>
+            </map>
+        </property>
+
+        <property name="addressProp">
+            <props>
+                <prop key="one">INDIA</prop>
+                <prop key="two">Pakistan</prop>
+                <prop key="three">USA</prop>
+                <prop key="four">USA</prop>
+            </props>
+        </property>
+
+    </bean>
+
+</beans>
