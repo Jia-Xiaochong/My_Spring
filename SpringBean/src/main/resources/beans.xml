@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="library" class="com.jiaxc.dao.Library" scope="prototype" >
+        <property name="libraryName" value="[北京市图书馆]" />
+    </bean>
+
+    <!-- 配置回调方法 -->
+    <bean id="newBook" class="com.jiaxc.dao.Book" init-method="myInit" destroy-method="myDestroy" scope="prototype">
+        <property name="name" value="《计算机组成原理》" />
+    </bean>
+
+    <!-- 配置后置处理器 -->
+    <!-- 后置处理器一旦定义不针对单个bean对象，所有bean对象在初始化时都会调用 -->
+    <bean class="com.jiaxc.dao.InitBook" scope="prototype" />
+
+</beans>
