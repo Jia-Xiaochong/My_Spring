@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <!--
+        Spring AOP
+     -->
+
+    <!-- 目标类 -->
+    <bean id="book" class="com.jiaxc.dao.Book" >
+        <property name="name" value="《数据结构》" />
+    </bean>
+
+    <!-- 通知类 -->
+    <bean id="myAspect" class="com.jiaxc.dao.MyAspect" />
+
+    <!-- 生成代理对象 -->
+    <bean id="bookProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 代理的目标对象 -->
+        <property name="target" ref="book" />
+        <!-- 用通知增强目标 -->
+        <property name="interceptorNames" value="myAspect" />
+        <!-- 如何生成代理，true:使用cglib; false :使用jdk动态代理 -->
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+
+</beans>
